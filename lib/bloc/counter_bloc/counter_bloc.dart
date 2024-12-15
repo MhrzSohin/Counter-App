@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:counter_app/bloc/counter_event.dart';
-import 'package:counter_app/bloc/counter_state.dart';
+import 'package:counter_app/bloc/counter_bloc/counter_event.dart';
+import 'package:counter_app/bloc/counter_bloc/counter_state.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(const CounterState()) {
