@@ -178,9 +178,9 @@ class _CounterScreenState extends State<CounterScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: TextButton(
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 40),
+                      child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -188,9 +188,12 @@ class _CounterScreenState extends State<CounterScreen> {
                                     builder: (context) =>
                                         const ListViewItems()));
                           },
-                          child: const Icon(
-                            Icons.task,
-                            size: 40,
+                          child: const Row(
+                            children: [
+                              Text("Add Notes."),
+                              Spacer(),
+                              Icon(Icons.add)
+                            ],
                           )),
                     )
                   ],
