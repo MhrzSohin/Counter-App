@@ -9,6 +9,9 @@ import 'package:counter_app/bloc/imagepickerbloc/image_picker_state.dart';
 import 'package:counter_app/bloc/switch_example/switch_bloc.dart';
 import 'package:counter_app/bloc/switch_example/switch_events.dart';
 import 'package:counter_app/bloc/switch_example/switch_state.dart';
+import 'package:counter_app/bloc/to_do_bloc/to_do_bloc.dart';
+import 'package:counter_app/bloc/to_do_bloc/to_do_events.dart';
+import 'package:counter_app/bloc/to_do_bloc/to_do_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -74,11 +77,9 @@ class _CounterScreenState extends State<CounterScreen> {
                           buildWhen: (previous, current) =>
                               previous.isSwitch != current.isSwitch,
                           builder: (context, state) {
-                            print("notifications");
                             return Switch(
                                 value: state.isSwitch,
                                 onChanged: (newValue) {
-                                  print(newValue);
                                   context
                                       .read<SwitchBloc>()
                                       .add(EnableOrDisableNotification());
@@ -105,7 +106,6 @@ class _CounterScreenState extends State<CounterScreen> {
                       buildWhen: (previous, current) =>
                           previous.mySlider != current.mySlider,
                       builder: (context, state) {
-                        print("Slider");
                         return Slider(
                             value: state.mySlider,
                             onChanged: (value) {
@@ -173,7 +173,8 @@ class _CounterScreenState extends State<CounterScreen> {
                         }
                         return Image.file(File(state.file!.path.toString()));
                       },
-                    )
+                    ),
+               
                   ],
                 ),
               ),
