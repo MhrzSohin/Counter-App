@@ -151,15 +151,28 @@ class _CounterScreenState extends State<CounterScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    const Align(
-                      alignment: Alignment.bottomRight,
-                      child: CircleAvatar(
-                        radius: 25,
-                        child: Icon(
-                          Icons.add_a_photo,
-                          size: 30,
-                        ),
-                      ),
+                    BlocBuilder<Imagepickerbloc, Imagepickerstate>(
+                      builder: (context, state) {
+                        if (state.file == null) {
+                          return InkWell(
+                            onTap: () {
+                              BlocProvider.of<Imagepickerbloc>(context)
+                                  .add(GalleryImagePickerEvent());
+                            },
+                            child: const Align(
+                              alignment: Alignment.bottomRight,
+                              child: CircleAvatar(
+                                radius: 25,
+                                child: Icon(
+                                  Icons.add_a_photo,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        return Image.file(File(state.file!.path.toString()));
+                      },
                     )
                   ],
                 ),
