@@ -1,9 +1,11 @@
 import 'package:counter_app/bloc/counter_bloc/counter_bloc.dart';
 import 'package:counter_app/bloc/imagepickerbloc/image_picker_bloc.dart';
+import 'package:counter_app/bloc/post_api_bloc/api_bloc.dart';
 import 'package:counter_app/bloc/switch_example/switch_bloc.dart';
 import 'package:counter_app/bloc/to_do_bloc/to_do_bloc.dart';
 import 'package:counter_app/bloc/to_do_bloc/to_do_state.dart';
 import 'package:counter_app/ui/counter_screen.dart';
+import 'package:counter_app/ui/data_fetching.dart';
 import 'package:counter_app/ui/list_view_items.dart';
 import 'package:counter_app/utils/image_picker_utils.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => Imagepickerbloc(ImagePickerUtils())),
         BlocProvider(
           create: (_) => ToDoBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (_) => ApiBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
