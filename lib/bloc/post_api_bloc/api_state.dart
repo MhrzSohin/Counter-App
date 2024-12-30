@@ -22,5 +22,5 @@ class ApiState extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [postStatus,postlist,message];
+  List<Object?> get props => [postStatus, postlist, message];
 }
