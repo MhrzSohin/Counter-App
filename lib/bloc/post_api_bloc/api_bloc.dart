@@ -11,7 +11,7 @@ class ApiBloc extends Bloc<ApiEvents, ApiState> {
   }
   void _postFetchedEvent(
       PostFetchedEvent events, Emitter<ApiState> emit) async {
-   await postRepository.fetchPost().then((value) {
+    await postRepository.fetchPost().then((value) {
       emit(state.copyWith(
           postlist: value,
           message: "Data Fetched Successfully",
