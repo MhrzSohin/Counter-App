@@ -1,13 +1,11 @@
 import 'package:counter_app/bloc/user_data_fetching/user_data_events.dart';
 import 'package:counter_app/bloc/user_data_fetching/user_data_state.dart';
-import 'package:counter_app/model/user_data_model/user_data_model.dart';
 import 'package:counter_app/repository/user_data_repository.dart';
 import 'package:counter_app/utils/enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserDataBloc extends Bloc<UserDataEvents, UserDataState> {
   UserDataRepository userDataRepository = UserDataRepository();
-  final List<UserDataModel> userlist = [];
   UserDataBloc() : super(UserDataState()) {
     on<UserDataFetchingEvent>(_userDataFetchingEvent);
    

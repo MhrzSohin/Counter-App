@@ -213,6 +213,22 @@ class _CounterScreenState extends State<CounterScreen> {
                                   builder: (context) => const UserDetails()));
                         },
                         child: Icon(Icons.people)),
+                           ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const UserDetails()));
+                        },
+                        child: Icon(Icons.people)),
+                           ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const UserDetails()));
+                        },
+                        child: Icon(Icons.people)),
                   ],
                 ),
               ),
