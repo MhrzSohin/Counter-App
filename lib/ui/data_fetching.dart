@@ -23,6 +23,11 @@ class _DataFetchingState extends State<DataFetching> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text("Data API"),
+      ),
       body: BlocConsumer<ApiBloc, ApiState>(
         listener: (context, state) {
           if (state.postStatus == PostStatus.success) {
@@ -40,15 +45,51 @@ class _DataFetchingState extends State<DataFetching> {
                 case PostStatus.failure:
                   return Center(child: Text(state.message.toString()));
                 case PostStatus.success:
-                  return ListView.builder(
-                      itemCount: state.postlist.length,
-                      itemBuilder: (context, index) {
-                        final item = state.postlist[index];
-                        return ListTile(
-                          title: Text(item.email.toString()),
-                          subtitle: Text(item.body.toString()),
-                        );
-                      });
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          onChanged: (value) {
+                            BlocProvider.of<ApiBloc>(context)
+                                .add(APIDataFilterEvent(value));
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Enter the text",
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        Expanded(
+                          child: state.searchMessage.isNotEmpty
+                              ? Center(
+                                  child: Text(state.searchMessage.toString()))
+                              : ListView.builder(
+                                  itemCount: state.tempPostList.isEmpty
+                                      ? state.postlist.length
+                                      : state.tempPostList.length,
+                                  itemBuilder: (context, index) {
+                                    if (state.tempPostList.isNotEmpty) {
+                                      final item = state.tempPostList[index];
+                                      return Card(
+                                        child: ListTile(
+                                          title: Text(item.email.toString()),
+                                          subtitle: Text(item.body.toString()),
+                                        ),
+                                      );
+                                    } else {
+                                      final item = state.postlist[index];
+                                      return Card(
+                                        child: ListTile(
+                                          title: Text(item.email.toString()),
+                                          subtitle: Text(item.body.toString()),
+                                        ),
+                                      );
+                                    }
+                                  }),
+                        ),
+                      ],
+                    ),
+                  );
               }
             },
           );

@@ -7,3 +7,8 @@ abstract class ApiEvents extends Equatable {
 }
 
 class PostFetchedEvent extends ApiEvents {}
+
+class APIDataFilterEvent extends ApiEvents {
+  final String searchText;
+  APIDataFilterEvent(this.searchText);
+}
