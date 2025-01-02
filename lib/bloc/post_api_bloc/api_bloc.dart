@@ -41,7 +41,7 @@ class ApiBloc extends Bloc<ApiEvents, ApiState> {
         emit(state.copyWith(
             tempPostList: tempPostList, searchMessage: "No Data Found"));
       } else {
-        emit(state.copyWith(tempPostList: tempPostList));
+        emit(state.copyWith(tempPostList: tempPostList, searchMessage: ''));
       }
     }
   }
