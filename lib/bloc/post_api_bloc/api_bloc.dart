@@ -31,7 +31,7 @@ class ApiBloc extends Bloc<ApiEvents, ApiState> {
 
   void _apiDataFilterEvent(APIDataFilterEvent events, Emitter<ApiState> emit) {
     if (events.searchText.isEmpty) {
-      emit(state.copyWith(tempPostList: [], searchMessage: ""));
+      emit(state.copyWith(tempPostList: tempPostList, searchMessage: ""));
     } else {
       tempPostList = state.postlist
           .where((element) =>
