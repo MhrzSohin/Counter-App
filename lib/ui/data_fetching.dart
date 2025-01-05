@@ -46,7 +46,7 @@ class _DataFetchingState extends State<DataFetching> {
                   return Center(child: Text(state.message.toString()));
                 case PostStatus.success:
                   return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
                       children: [
                         TextFormField(
@@ -60,32 +60,32 @@ class _DataFetchingState extends State<DataFetching> {
                           ),
                         ),
                         Expanded(
-                          child: state.searchMessage.isNotEmpty
-                              ? Center(
-                                  child: Text(state.searchMessage.toString()))
-                              : ListView.builder(
-                                  itemCount: state.tempPostList.isEmpty
-                                      ? state.postlist.length
-                                      : state.tempPostList.length,
-                                  itemBuilder: (context, index) {
-                                    if (state.tempPostList.isNotEmpty) {
-                                      final item = state.tempPostList[index];
-                                      return Card(
-                                        child: ListTile(
-                                          title: Text(item.email.toString()),
-                                          subtitle: Text(item.body.toString()),
-                                        ),
-                                      );
-                                    } else {
-                                      final item = state.postlist[index];
-                                      return Card(
-                                        child: ListTile(
-                                          title: Text(item.email.toString()),
-                                          subtitle: Text(item.body.toString()),
-                                        ),
-                                      );
-                                    }
-                                  }),
+                          child: ListView.builder(
+                              itemCount: state.tempPostList.isEmpty
+                                  ? state.postlist.length
+                                  : state.tempPostList.length,
+                              itemBuilder: (context, index) {
+                                if (state.tempPostList.isNotEmpty) {
+                                  final items = state.tempPostList[index];
+                                  return ListTile(
+                                    leading: CircleAvatar(
+                                      child: Text(items.id.toString()),
+                                    ),
+                                    title: Text(items.name.toString()),
+                                    subtitle: Text(items.email.toString()),
+                                  );
+                                } else {
+                                  final items = state.postlist[index];
+                                  return ListTile(
+                                    leading: CircleAvatar(
+                                      child: Text(items.id.toString()),
+                                    ),
+                                    title: Text(items.name.toString()),
+                                    subtitle: Text(items.email.toString()),
+                                  );
+                                }
+                                return null;
+                              }),
                         ),
                       ],
                     ),

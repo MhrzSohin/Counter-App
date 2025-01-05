@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:counter_app/bloc/post_api_bloc/api_events.dart';
 import 'package:counter_app/bloc/post_api_bloc/api_state.dart';
 import 'package:counter_app/model/post_model.dart';
@@ -31,17 +33,19 @@ class ApiBloc extends Bloc<ApiEvents, ApiState> {
 
   void _apiDataFilterEvent(APIDataFilterEvent events, Emitter<ApiState> emit) {
     if (events.searchText.isEmpty) {
-      emit(state.copyWith(tempPostList: tempPostList, searchMessage: ""));
+      emit(state.copyWith(tempPostList: state.postlist, searchMessage: ''));
     } else {
       tempPostList = state.postlist
-          .where((element) =>
-              element.id.toString() == events.searchText.toString())
+          .where((element) => element.email
+              .toString()
+              .toLowerCase()
+              .contains(events.searchText.toLowerCase()))
           .toList();
       if (tempPostList.isEmpty) {
         emit(state.copyWith(
-            tempPostList: tempPostList, searchMessage: "No Data Found"));
+            tempPostList: tempPostList, searchMessage: "No data Found"));
       } else {
-        emit(state.copyWith(tempPostList: tempPostList, searchMessage: ''));
+        emit(state.copyWith(tempPostList: tempPostList, searchMessage: ""));
       }
     }
   }
