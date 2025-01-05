@@ -5,6 +5,7 @@ import 'package:counter_app/bloc/switch_example/switch_bloc.dart';
 import 'package:counter_app/bloc/to_do_bloc/to_do_bloc.dart';
 import 'package:counter_app/bloc/user_data_fetching/user_data_bloc.dart';
 import 'package:counter_app/ui/counter_screen.dart';
+import 'package:counter_app/ui/movies_response_ui.dart';
 import 'package:counter_app/ui/user_details.dart';
 import 'package:counter_app/utils/image_picker_utils.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const CounterScreen(),
+        home: const MoviesResponseUi(),
       ),
     );
   }
