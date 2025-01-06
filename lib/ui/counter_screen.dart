@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:counter_app/bloc/counter_bloc/counter_bloc.dart';
 import 'package:counter_app/bloc/counter_bloc/counter_event.dart';
 import 'package:counter_app/bloc/counter_bloc/counter_state.dart';
@@ -11,6 +10,7 @@ import 'package:counter_app/bloc/switch_example/switch_events.dart';
 import 'package:counter_app/bloc/switch_example/switch_state.dart';
 import 'package:counter_app/ui/data_fetching.dart';
 import 'package:counter_app/ui/list_view_items.dart';
+import 'package:counter_app/ui/movies_response_ui.dart';
 import 'package:counter_app/ui/user_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,17 +23,26 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
+  CounterBloc? _counterBloc;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _counterBloc = CounterBloc();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Counter Application"),
-      ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: BlocBuilder<CounterBloc, CounterState>(
-          builder: (context, state) {
-            return Center(
+    return BlocProvider(
+      create: (context) => CounterBloc(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Counter Application"),
+        ),
+        body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Center(
               child: Container(
                 margin: const EdgeInsets.all(10),
                 child: Column(
@@ -115,12 +124,16 @@ class _CounterScreenState extends State<CounterScreen> {
                             });
                       },
                     ),
-                    Text(
-                      state.counter.toString(),
-                      style: const TextStyle(
-                        fontSize: 60,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    BlocBuilder<CounterBloc, CounterState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.counter.toString(),
+                          style: const TextStyle(
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -129,23 +142,33 @@ class _CounterScreenState extends State<CounterScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<CounterBloc>()
-                                  .add(IncrementCounter());
-                            },
-                            child: const Text("Increment")),
+                        BlocBuilder<CounterBloc, CounterState>(
+                          buildWhen: (previous, current) => false,
+                          builder: (context, state) {
+                            return ElevatedButton(
+                                onPressed: () {
+                                  context
+                                      .read<CounterBloc>()
+                                      .add(IncrementCounter());
+                                },
+                                child: const Text("Increment"));
+                          },
+                        ),
                         const SizedBox(
                           width: 20,
                         ),
-                        ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<CounterBloc>()
-                                  .add(DecrementCounter());
-                            },
-                            child: const Text("Decrement")),
+                        BlocBuilder<CounterBloc, CounterState>(
+                          buildWhen: (previous, current) => false,
+                          builder: (context, state) {
+                            return ElevatedButton(
+                                onPressed: () {
+                                  context
+                                      .read<CounterBloc>()
+                                      .add(DecrementCounter());
+                                },
+                                child: const Text("Decrement"));
+                          },
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -213,12 +236,19 @@ class _CounterScreenState extends State<CounterScreen> {
                                   builder: (context) => const UserDetails()));
                         },
                         child: Icon(Icons.people)),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MoviesResponseUi()));
+                        },
+                        child: Icon(Icons.movie_sharp)),
                   ],
                 ),
               ),
-            );
-          },
-        ),
+            )),
       ),
     );
   }

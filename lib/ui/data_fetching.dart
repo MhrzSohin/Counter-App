@@ -30,11 +30,11 @@ class _DataFetchingState extends State<DataFetching> {
       ),
       body: BlocConsumer<ApiBloc, ApiState>(
         listener: (context, state) {
-          if (state.postStatus == PostStatus.success) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text("DataFetched Successfully"),
-                backgroundColor: Colors.lightGreen));
-          }
+          // if (state.postStatus == PostStatus.success) {
+          //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          //       content: Text("DataFetched Successfully"),
+          //       backgroundColor: Colors.lightGreen));
+          // }
         },
         builder: (context, state) {
           return BlocBuilder<ApiBloc, ApiState>(

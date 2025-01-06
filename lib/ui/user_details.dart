@@ -30,12 +30,12 @@ class _UserDetailsState extends State<UserDetails> {
       ),
       body: BlocConsumer<UserDataBloc, UserDataState>(
         listener: (context, state) {
-          if (state.postStatus == PostStatus.success) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("User Data Fetched Successfully"),
-              backgroundColor: Colors.lightGreen,
-            ));
-          }
+          // if (state.postStatus == PostStatus.success) {
+          //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          //     content: Text("User Data Fetched Successfully"),
+          //     backgroundColor: Colors.lightGreen,
+          //   ));
+          // }
         },
         builder: (context, state) {
           if (state.postStatus == PostStatus.loading) {
